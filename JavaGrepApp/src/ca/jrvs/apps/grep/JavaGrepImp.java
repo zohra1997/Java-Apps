@@ -1,9 +1,16 @@
 package ca.jrvs.apps.grep;
 
-import javax.lang.model.type.ArrayType;
+
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JavaGrepImp implements JavaGrep {
     String reg;
@@ -14,8 +21,8 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public void process() throws IOException {
         List<String> matchedLines = new ArrayList<>();
-        for (File file:listFiles(getRootPath())){
-            for (String line : readLines(file)){
+        for (File file:listFilesStream(getRootPath())){
+            for (String line : readLinesStream(file)){
                 if (containsPattern(line)){
                     matchedLines.add(line);
 
@@ -26,6 +33,8 @@ public class JavaGrepImp implements JavaGrep {
 
         }
         writeToFile(matchedLines);
+
+
 
 
 
@@ -49,6 +58,17 @@ public class JavaGrepImp implements JavaGrep {
 
     }
 
+    public List<File> listFilesStream (String rootDir) throws IOException {
+
+        List<File> files = Files.walk(Paths.get(rootDir))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+
+
+    return files;
+
+    }
 
 
 
@@ -68,6 +88,27 @@ public class JavaGrepImp implements JavaGrep {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    public List<String> readLinesStream (File inputFile){
+        List<String> lines = new ArrayList<>();
+
+
+        try {
+
+            lines = Files.lines(inputFile.toPath())
+                    .collect(Collectors.toList());
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        } catch (UncheckedIOException e) {
+            System.out.println("Ignore:" + inputFile.toString());;
+        }
+
+
+      return lines;
+
+
     }
 
     @Override
