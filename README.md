@@ -13,9 +13,9 @@ GrepAppImp class implemets list all files of a directory including the subdirect
 read all Lines functions has also been implemented in two ways. First, using buffreredReader and FileReaders and the second methos using java 8 stream and Lambda syntax.</li>
 </ul>
 <h2 id="usage">Usage</h2>
-<pre><code> How To Use:  regex rootPath outFile
-
- Similar to : egrep -r {regex} {rootpath} &gt; {outFile}
+<pre><code>
+How To Use:  regex rootPath outFile
+Similar to : egrep -r {regex} {rootpath} &gt; {outFile}
 </code></pre>
 <ul>
 <li>regex:  a string of characters for describing the search pattern</li>
