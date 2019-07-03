@@ -1,9 +1,7 @@
 package ca.jrvs.apps.jdbc;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class JDBCExecuter {
     public static void main(String[] args) {
@@ -11,11 +9,7 @@ public class JDBCExecuter {
      try {
          Connection connection = dcm.getConnection();
          CustomerDao customerDao = new CustomerDao(connection);
-//         Customer customer = customerDao.findById(1000);
-//         System.out.println(customer.getFirstName()+" "+customer.getLastName()+" "+customer.getEmail());
-//         customer.setEmail("new@gmail.com");
-//         customer = customerDao.update(customer);
-//         System.out.println(customer.getFirstName()+" "+customer.getLastName()+" "+customer.getEmail());
+         orderDao OrderDao = new orderDao(connection);
          Customer customer = new Customer();
          customer.setFirstName("john");
          customer.setLastName("Mayor");
@@ -33,7 +27,8 @@ public class JDBCExecuter {
          bdcustomer = customerDao.update(bdcustomer);
          System.out.println(bdcustomer);
          customerDao.delete(bdcustomer.getId());
-
+         Order order = OrderDao.findById(1000);
+         System.out.println(order);
      } catch (SQLException e)
      {
          e.printStackTrace();
