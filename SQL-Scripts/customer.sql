@@ -1,7 +1,7 @@
 CREATE SEQUENCE hp_customer_seq start with 10000;
 
 CREATE TABLE customer (
-  customer_id long NOT NULL AUTO_INCREMENT,
+  customer_id bigint NOT NULL DEFAULT nextval('hp_customer_seq'),
   first_name varchar(50) DEFAULT NULL,
   last_name varchar(50) DEFAULT NULL,
   email varchar(50) DEFAULT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE customer (
   PRIMARY KEY (customer_id)
 );
 
---ALTER SEQUENCE hp_customer_seq OWNED BY customer.customer_id;
+ALTER SEQUENCE hp_customer_seq OWNED BY customer.customer_id;
 
 INSERT INTO customer (customer_id, first_name, last_name, email, phone, address, city, state, zipcode)
 VALUES
