@@ -1,7 +1,5 @@
 package ca.jrvs.apps.jdbc.util;
 
-
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +9,8 @@ import java.util.List;
 public abstract class DataAccessObject <T extends DataTransferObject>{
 
     protected final Connection connection;
-    protected final static String LAST_VAL = "select last_value from";
-    protected final static String CUSTOMER_SQQUENCE = "hq_customer_sequence";
+    protected final static String LAST_VAL = "SELECT max(customer_id) from customer";
+    protected final static String CUSTOMER_SEQUENCE = "hq_customer_sequence";
 
     public DataAccessObject(Connection connection ){
         super();
@@ -27,9 +25,8 @@ public abstract class DataAccessObject <T extends DataTransferObject>{
     public abstract void delete (long id);
 
     protected int getLastVal(String sequence){
-
         int key = 0;
-        String sql = LAST_VAL+sequence;
+        String sql = LAST_VAL;
         try(Statement statement = connection.createStatement()){
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next())
