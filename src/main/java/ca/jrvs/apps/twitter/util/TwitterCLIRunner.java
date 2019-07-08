@@ -1,4 +1,4 @@
-package ca.jrvs.apps.twitter;
+package ca.jrvs.apps.twitter.util;
 
 import ca.jrvs.apps.twitter.dao.CrdRespiratory;
 import ca.jrvs.apps.twitter.dao.TwitterResstDao;

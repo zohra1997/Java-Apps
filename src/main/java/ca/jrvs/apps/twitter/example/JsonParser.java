@@ -1,12 +1,10 @@
 package ca.jrvs.apps.twitter.example;
 
 import ca.jrvs.apps.twitter.example.dto.Company;
-import ca.jrvs.apps.twitter.example.dto.Financial;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class JsonParser {
 

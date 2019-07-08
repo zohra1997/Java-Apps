@@ -9,8 +9,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-
-import java.net.URLEncoder;
 import java.util.Arrays;
 
 public class TwitterApiTest {
@@ -22,6 +20,7 @@ public class TwitterApiTest {
         OAuthConsumer consumer = new CommonsHttpOAuthConsumer(ConsumerKey,ConsumerSecret);
         consumer.setTokenWithSecret(AccessToken,AccessSecret);
         // Request
+
 //        HttpGet request = new HttpGet("https://api.twitter.com/1.1/users/search.json?q=realDonaldTrump");
 //        consumer.sign(request);
 //        System.out.println("HTTP Header:");

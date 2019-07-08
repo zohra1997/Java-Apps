@@ -15,11 +15,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.net.URI;
 
-public class ApacheHttpHelper  implements HttpHelper{
+public class ApacheHttpHelper implements HttpHelper {
     private static String ConsumerKey = System.getenv("ConsumerKey");
-    private static String ConsumerSecret=System.getenv("ConsumerSecret");
+    private static String ConsumerSecret = System.getenv("ConsumerSecret");
     private static String AccessToken = System.getenv("AccessKey");
-    private static String AccessSecret=System.getenv("AccessToken");
+    private static String AccessSecret = System.getenv("AccessToken");
 
     @Override
     public HttpResponse httpPost(URI uri) {
@@ -39,7 +39,7 @@ public class ApacheHttpHelper  implements HttpHelper{
         HttpClient client = new DefaultHttpClient();
         HttpResponse response = null;
         try {
-            response= client.execute(httpPost);
+            response = client.execute(httpPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,8 +54,8 @@ public class ApacheHttpHelper  implements HttpHelper{
 
     @Override
     public HttpResponse httpGet(URI uri) {
-     OAuthConsumer consumer = Authentication();
-     HttpGet request = new HttpGet(uri);
+        OAuthConsumer consumer = Authentication();
+        HttpGet request = new HttpGet(uri);
         try {
             consumer.sign(request);
         } catch (OAuthMessageSignerException e) {
@@ -75,7 +75,7 @@ public class ApacheHttpHelper  implements HttpHelper{
         return response;
     }
 
-    protected OAuthConsumer Authentication (){
+    protected OAuthConsumer Authentication() {
         OAuthConsumer consumer = new CommonsHttpOAuthConsumer(ConsumerKey, ConsumerSecret);
         consumer.setTokenWithSecret(AccessToken, AccessSecret);
         return consumer;
