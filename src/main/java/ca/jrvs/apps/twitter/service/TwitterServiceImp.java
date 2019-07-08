@@ -28,34 +28,36 @@ public class TwitterServiceImp  implements  TwitterService{
         coordinates.setCoordinates(Arrays.asList(latitude,longitude));
         tweet.setCoordinates(coordinates);
         TwitterDao.save(tweet);
+        System.out.println(tweet);
 
     }
 
     @Override
     public void showTweet(String id, String[] field) {
-   if (!(IdCheck(id))){
-      throw new RuntimeException("Please Enter a valid ID:");
-   }
+     IdCheck(id);
      Tweet tweet = (Tweet) TwitterDao.FindByID(id);
         System.out.println(tweet);
     }
 
     @Override
     public void deleteTweet(String[] ids) {
+        for (String id : ids) {
+            IdCheck(id);
+            System.out.println(TwitterDao.deleteByID(id));
+        }
 
     }
 
-    protected static  Boolean IdCheck(String Id){
+    protected static  void IdCheck(String Id){
         char [] characters = Id.toCharArray();
         for (char c: characters){
             if(((c>='A'&& c <='Z')|| ((c>='a' && c <='z')))){
-
-                return false;
+                throw new RuntimeException("Id should be only numbers");
             }
 
         }
 
-        return true;
+
     }
 
     protected static void tweetPostCheck (String text, Double latitude, Double longitude){

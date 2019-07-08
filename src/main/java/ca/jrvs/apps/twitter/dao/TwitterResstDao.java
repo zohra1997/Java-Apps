@@ -19,9 +19,11 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
 
     public static String SearchUri="https://api.twitter.com/1.1/statuses/show.json?id=";
     public static String PostUri = "https://api.twitter.com/1.1/statuses/update.json?status=";
+    public static String DeleteUri = "https://api.twitter.com/1.1/statuses/destroy/";
+    public static int HTTP_OK = 200;
     private HttpHelper helper ;
-    public TwitterResstDao (HttpHelper helper) {
 
+    public TwitterResstDao (HttpHelper helper) {
         this.helper=helper;
     }
     @Override
@@ -40,7 +42,8 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
         }
 
         HttpResponse response =  helper.httpPost(uri);
-        CheckResponse(response, 200);
+        CheckResponse(response, HTTP_OK);
+
         return  ParseObject(response);
 
     }
@@ -56,15 +59,25 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
         }
 
         HttpResponse response = helper.httpGet(Uri);
-        CheckResponse(response, 200);
+        CheckResponse(response, HTTP_OK);
         return ParseObject(response);
 
     }
 
     @Override
     public Tweet deleteByID(String s) {
-        return null;
+        String request = DeleteUri+s+".json";
+        URI uri = null;
+        try {
+            uri = new URI(request);
+        }catch (URISyntaxException e){
+            throw new RuntimeException("Could not construct URI.");
+        }
+        HttpResponse response = helper.httpPost(uri);
+
+        return ParseObject(response);
     }
+
    protected void CheckResponse (HttpResponse response, int expectedStatusCode){
         int status = response.getStatusLine().getStatusCode();
         if (status != expectedStatusCode){
@@ -89,6 +102,8 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
       return tweet;
 
   }
+
+
 
 
 }

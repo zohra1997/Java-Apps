@@ -20,7 +20,7 @@ public class ApacheHttpHelper  implements HttpHelper{
     private static String ConsumerSecret=System.getenv("ConsumerSecret");
     private static String AccessToken = System.getenv("AccessKey");
     private static String AccessSecret=System.getenv("AccessToken");
-    public ApacheHttpHelper(){}
+
     @Override
     public HttpResponse httpPost(URI uri) {
         OAuthConsumer consumer = Authentication();
