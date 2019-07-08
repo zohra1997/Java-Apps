@@ -15,24 +15,25 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 
-public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
+public class TwitterResstDao implements CrdRespiratory<Tweet, String> {
 
-    public static String SearchUri="https://api.twitter.com/1.1/statuses/show.json?id=";
+    public static String SearchUri = "https://api.twitter.com/1.1/statuses/show.json?id=";
     public static String PostUri = "https://api.twitter.com/1.1/statuses/update.json?status=";
     public static String DeleteUri = "https://api.twitter.com/1.1/statuses/destroy/";
     public static int HTTP_OK = 200;
-    private HttpHelper helper ;
+    private HttpHelper helper;
 
-    public TwitterResstDao (HttpHelper helper) {
-        this.helper=helper;
+    public TwitterResstDao(HttpHelper helper) {
+        this.helper = helper;
     }
+
     @Override
     public Tweet save(Tweet entity) {
         String text = entity.getText();
         Double latitude = entity.getCoordinates().getCoordinates().get(0);
         Double longitude = entity.getCoordinates().getCoordinates().get(1);
-        PercentEscaper percentEscaper = new PercentEscaper("",false);
-        String post = PostUri+percentEscaper.escape(text)+"&long="+longitude+"&lat="+latitude;
+        PercentEscaper percentEscaper = new PercentEscaper("", false);
+        String post = PostUri + percentEscaper.escape(text) + "&long=" + longitude + "&lat=" + latitude;
         URI uri = null;
         try {
             uri = new URI(post);
@@ -41,10 +42,10 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
             throw new RuntimeException("Could not Construct the URL.");
         }
 
-        HttpResponse response =  helper.httpPost(uri);
+        HttpResponse response = helper.httpPost(uri);
         CheckResponse(response, HTTP_OK);
 
-        return  ParseObject(response);
+        return ParseObject(response);
 
     }
 
@@ -66,11 +67,11 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
 
     @Override
     public Tweet deleteByID(String s) {
-        String request = DeleteUri+s+".json";
+        String request = DeleteUri + s + ".json";
         URI uri = null;
         try {
             uri = new URI(request);
-        }catch (URISyntaxException e){
+        } catch (URISyntaxException e) {
             throw new RuntimeException("Could not construct URI.");
         }
         HttpResponse response = helper.httpPost(uri);
@@ -78,32 +79,30 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
         return ParseObject(response);
     }
 
-   protected void CheckResponse (HttpResponse response, int expectedStatusCode){
+    protected void CheckResponse(HttpResponse response, int expectedStatusCode) {
         int status = response.getStatusLine().getStatusCode();
-        if (status != expectedStatusCode){
-            throw new RuntimeException("Not recognized HTTP response:"+status);
+        if (status != expectedStatusCode) {
+            throw new RuntimeException("Not recognized HTTP response:" + status);
         }
 
-   }
+    }
 
-  protected Tweet ParseObject (HttpResponse response){
+    protected Tweet ParseObject(HttpResponse response) {
         String result;
-      try {
-          result = EntityUtils.toString(response.getEntity());
-      } catch (IOException e) {
-          throw new RuntimeException("could not convert HTTP response to a string");
-      }
-      Tweet tweet = null;
-      try {
-          tweet =(Tweet) JsonParser.toObjectFromJson(result, Tweet.class);
-      } catch (IOException e) {
-          throw new RuntimeException("Could not Parse the string to Tweet Object");
-      }
-      return tweet;
+        try {
+            result = EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            throw new RuntimeException("could not convert HTTP response to a string");
+        }
+        Tweet tweet = null;
+        try {
+            tweet = (Tweet) JsonParser.toObjectFromJson(result, Tweet.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not Parse the string to Tweet Object");
+        }
+        return tweet;
 
-  }
-
-
+    }
 
 
 }

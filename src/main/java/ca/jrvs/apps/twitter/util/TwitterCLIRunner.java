@@ -28,7 +28,7 @@ public class TwitterCLIRunner {
             Double lon = Double.parseDouble(args[3]);
             service.postTweet(tweet_txt, lat, lon);
         }
-        if (argument.equals("delete")){
+        if (argument.equals("delete")) {
             String tweetIds = args[1];
             String[] ids = tweetIds.split(" ");
             service.deleteTweet(ids);
