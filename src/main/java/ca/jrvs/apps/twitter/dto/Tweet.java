@@ -27,7 +27,7 @@ public class Tweet {
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("id")
-    private Integer id;
+    private long id;
     @JsonProperty("id_str")
     private String idStr;
     @JsonProperty("text")
@@ -35,11 +35,11 @@ public class Tweet {
     @JsonProperty("entities")
     private Entities entities;
     @JsonProperty("coordinates")
-    private Object coordinates;
+    private Coordinates coordinates;
     @JsonProperty("retweet_count")
-    private Integer retweetCount;
+    private long retweetCount;
     @JsonProperty("favorite_count")
-    private Integer favoriteCount;
+    private long favoriteCount;
     @JsonProperty("favorited")
     private Boolean favorited;
     @JsonProperty("retweeted")
@@ -58,12 +58,12 @@ public class Tweet {
     }
 
     @JsonProperty("id")
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -99,33 +99,33 @@ public class Tweet {
     }
 
     @JsonProperty("coordinates")
-    public Object getCoordinates() {
+    public  Coordinates getCoordinates() {
         return coordinates;
     }
 
     @JsonProperty("coordinates")
-    public void setCoordinates(Object coordinates) {
+    public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
 
     @JsonProperty("retweet_count")
-    public Integer getRetweetCount() {
+    public long getRetweetCount() {
         return retweetCount;
     }
 
     @JsonProperty("retweet_count")
-    public void setRetweetCount(Integer retweetCount) {
+    public void setRetweetCount(long retweetCount) {
         this.retweetCount = retweetCount;
     }
 
     @JsonProperty("favorite_count")
-    public Integer getFavoriteCount() {
+    public long getFavoriteCount() {
         return favoriteCount;
     }
 
     @JsonProperty("favorite_count")
-    public void setFavoriteCount(Integer favoriteCount) {
+    public void setFavoriteCount(long favoriteCount) {
         this.favoriteCount = favoriteCount;
     }
 
@@ -159,4 +159,21 @@ public class Tweet {
         this.additionalProperties.put(name, value);
     }
 
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "createdAt='" + createdAt + '\'' +
+                ", id=" + id +
+                ", idStr='" + idStr + '\'' +
+                ", text='" + text + '\'' +
+                ", entities=" + entities +
+                ", coordinates=" + coordinates +
+                ", retweetCount=" + retweetCount +
+                ", favoriteCount=" + favoriteCount +
+                ", favorited=" + favorited +
+                ", retweeted=" + retweeted +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }
