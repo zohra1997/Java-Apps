@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter.dao;
 
 import ca.jrvs.apps.twitter.dao.helper.ApacheHttpHelper;
+import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dto.Tweet;
 import ca.jrvs.apps.twitter.example.JsonParser;
 import com.google.gdata.util.common.base.PercentEscaper;
@@ -18,13 +19,18 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
 
     public static String SearchUri="https://api.twitter.com/1.1/statuses/show.json?id=";
     public static String PostUri = "https://api.twitter.com/1.1/statuses/update.json?status=";
+    private HttpHelper helper ;
+    public TwitterResstDao (HttpHelper helper) {
+
+        this.helper=helper;
+    }
     @Override
     public Tweet save(Tweet entity) {
         String text = entity.getText();
         Double latitude = entity.getCoordinates().getCoordinates().get(0);
-        Double longiyude = entity.getCoordinates().getCoordinates().get(1);
+        Double longitude = entity.getCoordinates().getCoordinates().get(1);
         PercentEscaper percentEscaper = new PercentEscaper("",false);
-        String post = PostUri+percentEscaper.escape(text);
+        String post = PostUri+percentEscaper.escape(text)+"&long="+longitude+"&lat="+latitude;
         URI uri = null;
         try {
             uri = new URI(post);
@@ -33,7 +39,7 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
             throw new RuntimeException("Could not Construct the URL.");
         }
 
-        HttpResponse response = (new ApacheHttpHelper().httpPost(uri));
+        HttpResponse response =  helper.httpPost(uri);
         CheckResponse(response, 200);
         return  ParseObject(response);
 
@@ -49,7 +55,7 @@ public class TwitterResstDao implements CrdRespiratory <Tweet, String>  {
             e.printStackTrace();
         }
 
-        HttpResponse response = (new ApacheHttpHelper().httpGet(Uri));
+        HttpResponse response = helper.httpGet(Uri);
         CheckResponse(response, 200);
         return ParseObject(response);
 
