@@ -1,21 +1,22 @@
 package ca.jrvs.apps.twitter.service;
 
-import ca.jrvs.apps.twitter.dao.CrdRespiratory;
-import ca.jrvs.apps.twitter.dao.TwitterResstDao;
+import ca.jrvs.apps.twitter.dao.CrdRepository;
 import ca.jrvs.apps.twitter.dto.Coordinates;
 import ca.jrvs.apps.twitter.dto.Tweet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
-
+@Service
 public class TwitterServiceImp implements TwitterService {
     public static int LAT_MIN = -90;
     public static int LAT_MAX = 90;
     public static int LONG_MIN = -180;
     public static int LONG_MAX = 180;
-    private CrdRespiratory TwitterDao;
-
-    public TwitterServiceImp(CrdRespiratory TwitterDao) {
+    private CrdRepository TwitterDao;
+@Autowired
+    public TwitterServiceImp(CrdRepository TwitterDao) {
         this.TwitterDao = TwitterDao;
     }
 

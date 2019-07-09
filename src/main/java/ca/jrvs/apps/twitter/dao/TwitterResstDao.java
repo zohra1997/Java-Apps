@@ -1,21 +1,21 @@
 package ca.jrvs.apps.twitter.dao;
 
-import ca.jrvs.apps.twitter.dao.helper.ApacheHttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dto.Tweet;
 import ca.jrvs.apps.twitter.example.JsonParser;
 import com.google.gdata.util.common.base.PercentEscaper;
-import com.sun.jndi.toolkit.url.Uri;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
-public class TwitterResstDao implements CrdRespiratory<Tweet, String> {
+@Repository
+public class TwitterResstDao implements CrdRepository<Tweet, String> {
 
     public static String SearchUri = "https://api.twitter.com/1.1/statuses/show.json?id=";
     public static String PostUri = "https://api.twitter.com/1.1/statuses/update.json?status=";
@@ -23,6 +23,7 @@ public class TwitterResstDao implements CrdRespiratory<Tweet, String> {
     public static int HTTP_OK = 200;
     private HttpHelper helper;
 
+    @Autowired
     public TwitterResstDao(HttpHelper helper) {
         this.helper = helper;
     }

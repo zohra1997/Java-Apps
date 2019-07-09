@@ -6,6 +6,8 @@ import ca.jrvs.apps.twitter.dto.Coordinates;
 import ca.jrvs.apps.twitter.dto.Tweet;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.StringEntity;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URI;
@@ -16,31 +18,49 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class TwitterResstDaoTest {
+     private HttpHelper helper ;
+     private TwitterResstDao dao ;
+     private Tweet expectedTweet = new Tweet();
+     private String id;
+
+
+
+     @Before
+     public void setup (){
+         helper = new ApacheHttpHelper();
+         dao = new TwitterResstDao(helper);
+         String TweetText = "this is a test tweet"+System.currentTimeMillis();
+         this.expectedTweet.setText(TweetText);
+
+     }
+
+
+
+
 
     @Test
     public void save() {
-       String TweetText = "this is a test tweet"+System.currentTimeMillis();
-       Tweet ExpectedTweet = new Tweet();
-        ExpectedTweet.setText(TweetText);
        Coordinates coordinates = new Coordinates();
        List<Double> myList = new ArrayList<>();
        myList.add(45.0);
        myList.add(89.0);
        coordinates.setCoordinates(myList);
-        ExpectedTweet.setCoordinates(coordinates);
-        System.out.println(ExpectedTweet);
-       HttpHelper helper = new ApacheHttpHelper();
-       TwitterResstDao dao = new TwitterResstDao(helper);
-       Tweet actualTweet = dao.save(ExpectedTweet);
+       expectedTweet.setCoordinates(coordinates);
+       System.out.println(expectedTweet);
+       Tweet actualTweet = dao.save(expectedTweet);
        assertNotNull(actualTweet);
-       assertEquals(ExpectedTweet.getText(),actualTweet.getText());
+       assertEquals(expectedTweet.getText(),actualTweet.getText());
+       this.id = actualTweet.getIdStr();
+       Tweet showTweet = dao.FindByID(this.id);
+       assertEquals(actualTweet.getIdStr(), showTweet.getIdStr());
     }
 
-    @Test
-    public void findByID() {
-    }
 
-    @Test
-    public void deleteByID() {
+
+    @After
+    public void cleanup(){
+         dao.deleteByID(this.id);
+
+
     }
 }

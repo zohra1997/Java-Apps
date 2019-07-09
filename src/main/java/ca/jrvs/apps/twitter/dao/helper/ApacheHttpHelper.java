@@ -11,15 +11,18 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
-
+@Component
 public class ApacheHttpHelper implements HttpHelper {
     private static String ConsumerKey = System.getenv("ConsumerKey");
     private static String ConsumerSecret = System.getenv("ConsumerSecret");
     private static String AccessToken = System.getenv("AccessKey");
     private static String AccessSecret = System.getenv("AccessToken");
+
+    public ApacheHttpHelper(){};
 
     @Override
     public HttpResponse httpPost(URI uri) {
