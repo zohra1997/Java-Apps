@@ -8,7 +8,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  <properties>
 
 <maven.compiler.source>1.8</maven.compiler.source>
-
 <maven.compiler.target>1.8</maven.compiler.target>
  </properties>
  <dependencies>
@@ -37,6 +36,29 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          <groupId>com.fasterxml.jackson.core</groupId>
          <artifactId>jackson-databind</artifactId>
          <version>2.9.4</version>
+     </dependency>
+     <dependency>
+         <groupId>org.junit.jupiter</groupId>
+         <artifactId>junit-jupiter-api</artifactId>
+         <version>RELEASE</version>
+         <scope>compile</scope>
+     </dependency>
+     <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+     </dependency>
+     <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.12</version>
+         <scope>test</scope>
+     </dependency>
+     <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.12</version>
+         <scope>test</scope>
      </dependency>
  </dependencies>
 </project>
