@@ -1,18 +1,21 @@
-package ca.jrvs.apps.twitter.util;
+package ca.jrvs.apps.twitter;
 
-import ca.jrvs.apps.twitter.dao.CrdRespiratory;
-import ca.jrvs.apps.twitter.dao.TwitterResstDao;
-import ca.jrvs.apps.twitter.dao.helper.ApacheHttpHelper;
-import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.service.TwitterServiceImp;
+import ca.jrvs.apps.twitter.service.TwitterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
+@Component
 public class TwitterCLIRunner {
-    public static void main(String[] args) {
-        HttpHelper helper = new ApacheHttpHelper();
-        CrdRespiratory dao = new TwitterResstDao(helper);
-        TwitterServiceImp service = new TwitterServiceImp(dao);
+
+    private TwitterService service;
+  @Autowired
+    public TwitterCLIRunner(TwitterService service) {
+        this.service = service;
+    }
+
+
+    public  void  run(String[] args) {
+
         if (args.length < 2) {
             throw new RuntimeException("Enter Valid Arguments");
         }
