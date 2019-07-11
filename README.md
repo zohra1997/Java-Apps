@@ -59,13 +59,12 @@ Similar to : egrep -r {regex} {rootpath} &gt; {outFile}
 <p>Firstly, authorization component should be setup as environmental variables.</p>
 <pre><code>To post a tweet: post "tweet_text" latitude longitude 
 
-Description: Create a tweet with a geotag and output the created 
-tweet object in JSON format.
+Description: Create a tweet with a geotag and 
+output the created tweet object in JSON format.
 Arguments:
-
- - tweet_text - tweet_text cannot exceed 150.
- -  UTF-8 encoded characters.
- -  latitude:longitude - Geo location.
+- tweet_text - tweet_text cannot exceed 150.
+- UTF-8 encoded characters.
+- latitude:longitude - Geo location.
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
