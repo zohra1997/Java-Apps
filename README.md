@@ -63,9 +63,9 @@ Description: Create a tweet with a geotag and
 output the created tweet object in JSON format.
 Arguments:
 
-- tweet_text - tweet_text cannot exceed 150.
--  UTF-8 encoded characters.
--  latitude:longitude - Geo location.
+- tweet_text can not exceed 150
+- UTF-8 encode characters
+- latitude:longitude - Geo locations
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
