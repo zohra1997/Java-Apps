@@ -63,8 +63,8 @@ Description: Post a tweet with the given text
 and Geotags. 
 Arguments:
 
-- Tweet-text: Can not exceed 150 characters.
-- latitude and longitude: Geo Locations. 
+&gt; Tweet-text: Can not exceed 150 characters.
+&gt; latitude and longitude: Geo Locations. 
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
@@ -72,7 +72,7 @@ Arguments:
  tweet object in JSON format.
  Arguments:
  
- - Tweet Id should contain only numbers.
+&gt; Tweet Id should contain only numbers.
  
 </code></pre>
 <pre><code>To delete a Tweet: delete Tweet-Id
@@ -81,7 +81,7 @@ Description: Delete a list of tweets by id
 Output deleted tweet id and print deleted tweet
 object.
 
-- Tweet Id should be numbers only.
+&gt; Tweet Id should be numbers only.
 
 </code></pre>
 <h2 id="design-and-implementation-2">Design and Implementation</h2>
