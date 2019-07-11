@@ -64,7 +64,8 @@ and Geotags.
 Arguments:
 
 &gt; Tweet-text: Can not exceed 150 characters.
-&gt; latitude and longitude: Geo Locations. 
+&gt; latitude and longitude: Geo Locations.
+
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
