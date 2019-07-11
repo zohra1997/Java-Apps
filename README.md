@@ -57,15 +57,14 @@ Similar to : egrep -r {regex} {rootpath} &gt; {outFile}
 <p>This is a twitter command line app that takes advantage of twitter REST Api to Post, Delete and show tweets.</p>
 <h2 id="usage-1">Usage</h2>
 <p>Firstly, authorization component should be setup as environmental variables.</p>
-<pre><code>To post a tweet: post "tweet_text" latitude longitude 
+<pre><code>To Post a Tweet: post "Tweet_text" latitude longitude 
 
-Description: Create a tweet with a geotag and 
-output the created tweet object in JSON format.
+Description: Post a tweet with the given text 
+and Geotags. 
 Arguments:
 
-- tweet_text can not exceed 150
-- UTF-8 encode characters
-- latitude:longitude - Geo locations
+- Tweet-text: Can not exceed 150 characters.
+- latitude and longitude: Geo Locations. 
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
