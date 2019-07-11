@@ -62,9 +62,10 @@ Similar to : egrep -r {regex} {rootpath} &gt; {outFile}
 Description: Create a tweet with a geotag and output the created 
 tweet object in JSON format.
 Arguments:
+
  - tweet_text - tweet_text cannot exceed 150.
- - UTF-8 encoded characters.
- - latitude:longitude - Geo location.
+ -  UTF-8 encoded characters.
+ -  latitude:longitude - Geo location.
 </code></pre>
 <pre><code> To show a tweet: show  Tweet-Id
  
