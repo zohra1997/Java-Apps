@@ -18,12 +18,46 @@ public abstract class DataAccessObject <T extends DataTransferObject>{
 
     }
 
+    /**
+     *
+     * @param id
+     * @return Generic Object type T
+     */
+
     public abstract T findById(long id);
+
+    /**
+     *
+     * @return list of all object from specified table
+     */
     public abstract List<T> findAll();
+
+    /**
+     *
+     * @param dto
+     * @return updated version of dto object
+     */
     public abstract T update ( T dto);
+
+    /**
+     *
+     * @param dto
+     * @return created dto object
+     */
     public abstract T create (T dto);
+
+    /**
+     *
+     * @param id
+     * this method deletes the object with corresponding Id from table
+     */
     public abstract void delete (long id);
 
+    /**
+     *
+     * @param sequence
+     * @return ID of last entry of the table
+     */
     protected int getLastVal(String sequence){
         int key = 0;
         String sql = LAST_VAL;
@@ -42,12 +76,6 @@ public abstract class DataAccessObject <T extends DataTransferObject>{
 
         }
 
-
     }
-
-
-
-
-
 
 }

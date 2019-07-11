@@ -28,7 +28,7 @@ public class TwitterServiceImp implements TwitterService {
         Coordinates coordinates = new Coordinates();
         coordinates.setCoordinates(Arrays.asList(latitude, longitude));
         tweet.setCoordinates(coordinates);
-        TwitterDao.save(tweet);
+        TwitterDao.create(tweet);
         System.out.println(tweet);
 
     }
@@ -63,6 +63,9 @@ public class TwitterServiceImp implements TwitterService {
 
     protected static void tweetPostCheck(String text, Double latitude, Double longitude) {
         char[] characters = text.toCharArray();
+        if (text.isEmpty()){
+            throw new IllegalArgumentException("tweet should not be empty");
+        }
         if (characters.length > 150) {
             throw new IllegalArgumentException("Can not Post more than 150 characters");
         }

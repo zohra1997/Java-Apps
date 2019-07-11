@@ -29,7 +29,7 @@ public class TwitterResstDao implements CrdRepository<Tweet, String> {
     }
 
     @Override
-    public Tweet save(Tweet entity) {
+    public Tweet create(Tweet entity) {
         String text = entity.getText();
         Double latitude = entity.getCoordinates().getCoordinates().get(0);
         Double longitude = entity.getCoordinates().getCoordinates().get(1);

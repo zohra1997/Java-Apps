@@ -26,8 +26,6 @@ public class TwitterCliSpringBoot implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TwitterCliSpringBoot.class);
-
-        //Turn off web
         app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
     }
