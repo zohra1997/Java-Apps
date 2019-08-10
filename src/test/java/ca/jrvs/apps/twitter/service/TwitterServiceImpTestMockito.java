@@ -31,12 +31,4 @@ public class TwitterServiceImpTestMockito {
              e.getStackTrace();
          }
     }
-
-    @Test
-    public void showTweet() {
-    }
-
-    @Test
-    public void deleteTweet() {
-    }
 }

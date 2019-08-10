@@ -5,7 +5,6 @@ import ca.jrvs.apps.twitter.dto.Coordinates;
 import ca.jrvs.apps.twitter.dto.Tweet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 
 @Service
@@ -15,7 +14,8 @@ public class TwitterServiceImp implements TwitterService {
     public static int LONG_MIN = -180;
     public static int LONG_MAX = 180;
     private CrdRepository TwitterDao;
-@Autowired
+
+    @Autowired
     public TwitterServiceImp(CrdRepository TwitterDao) {
         this.TwitterDao = TwitterDao;
     }
@@ -30,7 +30,6 @@ public class TwitterServiceImp implements TwitterService {
         tweet.setCoordinates(coordinates);
         TwitterDao.create(tweet);
         System.out.println(tweet);
-
     }
 
     @Override
@@ -46,7 +45,6 @@ public class TwitterServiceImp implements TwitterService {
             IdCheck(id);
             System.out.println(TwitterDao.deleteByID(id));
         }
-
     }
 
     protected static void IdCheck(String Id) {
@@ -55,15 +53,12 @@ public class TwitterServiceImp implements TwitterService {
             if (((c >= 'A' && c <= 'Z') || ((c >= 'a' && c <= 'z')))) {
                 throw new RuntimeException("Id should be only numbers");
             }
-
         }
-
-
     }
 
     protected static void tweetPostCheck(String text, Double latitude, Double longitude) {
         char[] characters = text.toCharArray();
-        if (text.isEmpty()){
+        if (text.isEmpty()) {
             throw new IllegalArgumentException("tweet should not be empty");
         }
         if (characters.length > 150) {
@@ -77,7 +72,5 @@ public class TwitterServiceImp implements TwitterService {
 
             throw new IllegalArgumentException("Logitude should be between [-180 180]");
         }
-
-
     }
 }

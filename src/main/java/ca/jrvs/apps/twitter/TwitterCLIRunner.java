@@ -8,18 +8,14 @@ import org.springframework.stereotype.Component;
 public class TwitterCLIRunner {
 
     private TwitterService service;
-  @Autowired
+    @Autowired
     public TwitterCLIRunner(TwitterService service) {
         this.service = service;
     }
-
-
-    public  void  run(String[] args) {
-
+    public void run(String[] args) {
         if (args.length < 2) {
             throw new RuntimeException("Enter Valid Arguments");
         }
-
         System.out.println("USage: show|Delete|post");
         String argument = args[0].toLowerCase();
         if (argument.equals("show")) {
@@ -36,6 +32,5 @@ public class TwitterCLIRunner {
             String[] ids = tweetIds.split(" ");
             service.deleteTweet(ids);
         }
-
     }
 }
